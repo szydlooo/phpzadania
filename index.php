@@ -1,8 +1,8 @@
 <?php
-require_once('class/User.logowanie.php');
-
-$user = new User('jkowalski', 'tajneHasło');
-
-echo '<pre>';
+require('class/User.logowanie.php');
+echo "<pre>";
+$db = new mysqli('localhost', 'root', '', 'loginForm');
+$user = new User("jkowalski","tajneHasło");
 var_dump($user);
+
 ?>
