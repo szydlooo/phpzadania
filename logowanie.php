@@ -13,5 +13,6 @@ class User {
         $this->lastname = "";
     }
 }
+
 ?>
 
