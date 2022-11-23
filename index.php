@@ -1,4 +1,5 @@
 <?php
+require_once('config.php');
 require('class/User.logowanie.php');
 echo "<pre>";
 $db = new mysqli('localhost', 'root', '', 'loginForm');
