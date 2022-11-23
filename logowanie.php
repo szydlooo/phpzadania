@@ -1,47 +1,24 @@
 <?php
-Class User{
-   private $db;
-   private int $id;
-   private string $login;
-   private string $password;
-   private string $firstName;
-   private string $lastName;
+require_once('config.php');
 
-
-   public function __construct(string $login, string $password)
-   {
-       $this->login = $login;
-       $this->password_hash = $password;
-       // referencing global DB connection
-       global $db;
-       $this->db = &$db;
-   }
-   public function isAuth() : bool {
-       //function returns true if the id of the user has been set (has been pulled from db)
-       if(isset($this->id) && $this->id != null)
-           return true;
-       else
-           return false;
-   }
-   public function login() {
-       $query = "SELECT * FROM user WHERE login = ? LIMIT 1";
-       $preparedQuery = $this->db->prepare($query);
-       $preparedQuery->bind_param('s', $this->login);
-       $preparedQuery->execute();
-       $result = $preparedQuery->get_result();
-       $row = $result->fetch_assoc();
-       if(password_verify($this->password, $row['password'])) {
-           $this->id = $row['id'];
-           $this->firstName = $row['firstName'];
-           $this->lastName = $row['lastName'];
-       }
-   }
-   public function logout() {
-
-   }
-   public function register() {
-
-   }
+if(isset($_REQUEST['login']) && isset($_REQUEST['password'])) {
+    //jeżeli już podano dane do logowania
+    
+    $user = new User($_REQUEST['login'], $_REQUEST['password']);
+    if($user->login()) {
+        //echo "Zalogowano poprawnie użytkownika: ".$user->getName();
+        $v = array(
+            'message' => "Zalogowano poprawnie użytkownika: ".$user->getName(),
+        );
+        $twig->display('message.html.twig', $v);
+    } else {
+        //echo "Błędny login lub hasło";
+        $twig->display('message.html.twig', 
+                            ['message' => "Błędny login lub hasło"]);
+    }
+} else {
+    //jeśli jeszcze nie podano danych
+    //wyświetl formularz logowania
+    $twig->display('login.html.twig');
 }
-?>
-
+?>   
