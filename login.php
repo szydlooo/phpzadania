@@ -21,4 +21,4 @@ if(isset($_REQUEST['login']) && isset($_REQUEST['password'])) {
     //wyświetl formularz logowania
     $twig->display('login.html.twig');
 }
-?>   
+?> 
