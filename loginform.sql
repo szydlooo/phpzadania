@@ -27,12 +27,12 @@ SET time_zone = "+00:00";
 -- Struktura tabeli dla tabeli `dane`
 --
 
-CREATE TABLE `dane` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `firstname` varchar(32) NOT NULL,
-  `lastname` varchar(32) NOT NULL
+  `firstName` varchar(32) NOT NULL,
+  `lastName` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
